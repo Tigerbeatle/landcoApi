@@ -2,15 +2,13 @@ package middleware
 
 import (
 	"net/http"
-	"github.com/tigerbeatle/cards/models"
+	"github.com/tigerbeatle/landcoApi/models"
 	"encoding/json"
 	"reflect"
 	"fmt"
 	"github.com/gorilla/context"
 	"github.com/julienschmidt/httprouter"
-
-	u "github.com/tigerbeatle/cards/utilities"
-
+	u "github.com/tigerbeatle/landcoApi/utilities"
 	"github.com/dgrijalva/jwt-go"
 	"strings"
 )
