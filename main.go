@@ -1,11 +1,11 @@
 package main
 
 import (
-	"github.com/tigerbeatle/landco_api/models"
+	"github.com/tigerbeatle/landcoApi/models"
 	"github.com/justinas/alice"
-	"github.com/tigerbeatle/landco_api/middleware"
-	"github.com/tigerbeatle/landco_api/routes"
-	controller "github.com/tigerbeatle/landco_api/controllers"
+	"github.com/tigerbeatle/landcoApi/middleware"
+	"github.com/tigerbeatle/landcoApi/routes"
+	controller "github.com/tigerbeatle/landcoApi/controllers"
 	"net/http"
 	"log"
 )

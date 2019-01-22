@@ -3,7 +3,7 @@ package controllers
 import (
 	"github.com/mongodb/mongo-go-driver/mongo"
 	"net/http"
-	"github.com/tigerbeatle/cards/models"
+	"github.com/tigerbeatle/landcoApi/models"
 	"fmt"
 	"github.com/gorilla/context"
 	"encoding/json"

@@ -1,7 +1,7 @@
 package controllers
 import (
 	"net/http"
-	"github.com/tigerbeatle/cards/models"
+	"github.com/tigerbeatle/landcoApi/models"
 	"encoding/json"
 	"github.com/mongodb/mongo-go-driver/mongo"
 )
