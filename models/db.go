@@ -1,8 +1,6 @@
 package models
 
 import (
-
-
 	"github.com/mongodb/mongo-go-driver/mongo"
 	"github.com/mongodb/mongo-go-driver/core/connstring"
 	"github.com/kelseyhightower/envconfig"
