@@ -75,6 +75,7 @@ func BodyHandler(v interface{}) func(http.Handler) http.Handler {
 
 func ContentTypeHandler(next http.Handler) http.Handler {
 	fn := func(w http.ResponseWriter, r *http.Request) {
+		fmt.println("Content-Type:",r.Header.Get("Content-Type"))
 		if r.Header.Get("Content-Type") != "application/json" {
 			models.WriteError(w, models.ErrUnsupportedMediaType)
 			return
