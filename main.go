@@ -30,7 +30,7 @@ func main() {
 
 	// root
 	router.Get("/", commonHandlers.ThenFunc(appH.HomeHandler))
-	router.Get("/api/1.0/acct/ping", commonHandlers.Append(middleware.ContentTypeHandler).ThenFunc(appA.Ping))
+	router.Get("/api/1.0/acct/ping", commonHandlers.ThenFunc(appA.Ping))
 
 
 
