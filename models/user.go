@@ -3,18 +3,18 @@ package models
 import (
 	"github.com/mongodb/mongo-go-driver/mongo"
 	"github.com/mongodb/mongo-go-driver/bson"
-	"github.com/mongodb/mongo-go-driver/bson/objectid"
+	"github.com/mongodb/mongo-go-driver/bson/primitive"
+	//"github.com/mongodb/mongo-go-driver/mongo/options"
 	//"time"
 	//"errors"
 	"log"
 	"context"
-	"fmt"
 )
 
 type (
 
 	User struct {
-		ID         objectid.ObjectID   `json:"id" bson:"_id,omitempty"`
+		ID         primitive.ObjectID   `json:"id" bson:"_id,omitempty"`
 		UUID     string `json:"uuid"      bson:"uuid"`
 	}
 
@@ -35,13 +35,28 @@ type UsersCollection struct {
 
 
 func (r *UserRepo) UserExist(user *User) (bool) {
+	var result User
+	filter := bson.D{{"uuid", user.UUID}}
+
+	err := r.Coll.FindOne(context.TODO(), filter).Decode(&result)
+	if err != nil {
+		log.Fatal(err)
+		return false
+	}
+
+	return true
+/*
 	cursor, err := r.Coll.Find(
 		context.Background(),
+
 		bson.NewDocument(bson.EC.String("uuid", user.UUID)),
 	)
+
 	if err != nil {
 		log.Fatal(err)
 	}
+
+
 	defer cursor.Close(context.Background())
 	itemRead := User{}
 	for cursor.Next(context.Background()) {
@@ -53,16 +68,20 @@ func (r *UserRepo) UserExist(user *User) (bool) {
 	}
 	// no user found, return empty string
 	return false
-
+*/
 }
 
-func (r *UserRepo) Create(user *User) (objectid.ObjectID, error) {
+/*
+
+func (r *UserRepo) Create(user *User) (primitive.ObjectID, error) {
 	fmt.Println("------user.UUID:", user.UUID)
 	res, err := r.Coll.InsertOne(context.Background(), bson.NewDocument(
 		bson.EC.String("uuid", user.UUID),
 	))
-	return res.InsertedID.(objectid.ObjectID), err
+	return res.InsertedID.(primitive.ObjectID), err
 }
+
+*/
 
 /*
 func (r *UserRepo) Login(email string, password string) (UserResource, error) {

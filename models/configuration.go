@@ -25,6 +25,16 @@ type Token struct {
 	jwt.StandardClaims
 }
 
+type Specification struct {
+	Host	string
+	Database	string
+	Username	string
+	Password	string
+}
+
+
+
+
 /*
 func ValidateToken(tokenStr string) (interface{}, error){
 	hmacSecretString := GetSecret()
