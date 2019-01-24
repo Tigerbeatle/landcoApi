@@ -37,7 +37,7 @@ func AcceptHandler(next http.Handler) http.Handler {
 		fmt.Println("r.URL.Path = ", r.URL.Path)
 		fmt.Println("r.Header Accept = ", r.Header.Get("Accept"))
 		fmt.Println("r.Header Authorization = ", r.Header.Get("Authorization"))
-		if r.Header.Get("Accept") != "application/vnd.api+json" {
+		if r.Header.Get("Accept") != "application/json" {
 			models.WriteError(w, models.ErrNotAcceptable)
 			return
 		}
@@ -75,7 +75,7 @@ func BodyHandler(v interface{}) func(http.Handler) http.Handler {
 
 func ContentTypeHandler(next http.Handler) http.Handler {
 	fn := func(w http.ResponseWriter, r *http.Request) {
-		if r.Header.Get("Content-Type") != "application/vnd.api+json" {
+		if r.Header.Get("Content-Type") != "application/json" {
 			models.WriteError(w, models.ErrUnsupportedMediaType)
 			return
 		}

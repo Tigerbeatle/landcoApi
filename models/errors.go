@@ -21,8 +21,8 @@ type Error struct {
 
 var (
     ErrBadRequest = &Error{"bad_request", 400, "Bad Request", "Request body is not well-formed. It must be JSON."}
-    ErrNotAcceptable = &Error{"not_acceptable", 406, "Not Acceptable", "Accept header must be set to 'application/vnd.api+json'."}
-    ErrUnsupportedMediaType = &Error{"unsupported_media_type", 415, "Unsupported Media Type", "Content-Type header must be set to: 'application/vnd.api+json'."}
+    ErrNotAcceptable = &Error{"not_acceptable", 406, "Not Acceptable", "Accept header must be set to 'application/json'."}
+    ErrUnsupportedMediaType = &Error{"unsupported_media_type", 415, "Unsupported Media Type", "Content-Type header must be set to: 'application/json'."}
     ErrInternalServer = &Error{"internal_server_error", 500, "Internal Server Error", "Oops... something went wrong."}
     ErrUserAlreadyExists = &Error{"user_already_exists", 701, "User Already Exists", "A user already exists using this email address."}
 
@@ -37,7 +37,7 @@ var (
 )
 
 func WriteError(w http.ResponseWriter, err *Error) {
-    w.Header().Set("Content-Type", "application/vnd.api+json")
+    w.Header().Set("Content-Type", "application/json")
     w.WriteHeader(err.Status)
     json.NewEncoder(w).Encode(Errors{[]*Error{err}})
 }
