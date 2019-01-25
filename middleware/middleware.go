@@ -74,6 +74,7 @@ func BodyHandler(v interface{}) func(http.Handler) http.Handler {
 	return m
 }
 
+/*
 func ContentTypeHandler(next http.Handler) http.Handler {
 	fn := func(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("Content-Type:",r.Header.Get("Content-Type"))
@@ -85,7 +86,7 @@ func ContentTypeHandler(next http.Handler) http.Handler {
 	}
 	return http.HandlerFunc(fn)
 }
-
+*/
 /*
 func AuthorizationHandler_old(next http.Handler) http.Handler {
 	fn := func(w http.ResponseWriter, r *http.Request) {
