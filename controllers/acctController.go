@@ -15,7 +15,7 @@ type AccountContext struct {
 func (c *AccountContext) Ping(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("In PING SO mabye before this?")
 	basic := models.BasicJSONReturn{"LandcoAPI", "200", "Pong"}
-	w.Header().Set("Content-Type", "JSON")
+	w.Header().Set("Content-Type", "charset=utf-8")
 	json.NewEncoder(w).Encode(basic)
 
 }
