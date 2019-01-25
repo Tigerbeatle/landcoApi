@@ -43,6 +43,7 @@ func AcceptHandler(next http.Handler) http.Handler {
 			models.WriteError(w, models.ErrNotAcceptable)
 			return
 		}
+		fmt.Println("GOT HERE SO IT ISSUE IS AFTER THIS!!")
 		next.ServeHTTP(w, r)
 	}
 	return http.HandlerFunc(fn)
