@@ -39,6 +39,7 @@ func AcceptHandler(next http.Handler) http.Handler {
 		fmt.Println("r.Header Accept = ", r.Header.Get("Accept"))
 		fmt.Println("r.Header Authorization = ", r.Header.Get("Authorization"))
 		if r.Header.Get("Accept") != "application/json" {
+			fmt.Println("NOT ACCEPTABLE")
 			models.WriteError(w, models.ErrNotAcceptable)
 			return
 		}
