@@ -160,3 +160,46 @@ var filter = bson.NewDocument(bson.EC.String("email", user.Email))
 	if res.MatchedCount == 0 {
 	// Do something useful if there was no match (new record was inserted)
 	}
+
+
+
+
+
+
+
+url_register = llHTTPRequest("http://www.landco-sl.com:8002/api/1.0/dns/register",[HTTP_METHOD,"GET",HTTP_ACCEPT,"application/json"],"serialNumber="+(string)objectKey+"&language="+language+"&version="+(string)myCurrentVersion+"&aliveTestCount=0&removeTarget=no&aliveTestStatus=Pass&ownerName="+ownerName+"&ownerUUID="+(string)ownerUUID+"&parcelSurl="+surl+"&parcelUrl="+llEscapeURL(url)+"&parcelName="+parcelName+"&type=PARCEL_IDENTIEIER");
+
+
+url_register = llHTTPRequest("http://www.landco-sl.com:8002/api/1.0/dns/register",[HTTP_METHOD,"GET",HTTP_ACCEPT,"application/json"],
+
+"serialNumber="+(string)objectKey+"&
+language="+language+"&
+version="+(string)myCurrentVersion+"&
+aliveTestCount=0&
+removeTarget=no&
+aliveTestStatus=Pass&
+ownerName="+ownerName+"&
+ownerUUID="+(string)ownerUUID+"&
+parcelSurl="+surl+"&
+parcelUrl="+llEscapeURL(url)+"&
+parcelName="+parcelName+"&
+type=PARCEL_IDENTIEIER");
+
+
+serialNumber
+language
+version
+aliveTestCount
+removeTarget
+aliveTestStatus
+ownerName
+ownerUUID
+parcelSurl
+parcelUrl
+parcelName
+type
+
+
+
+
+

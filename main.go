@@ -8,10 +8,17 @@ import (
 	controller "github.com/tigerbeatle/landcoApi/controllers"
 	"net/http"
 	"log"
+	"github.com/kelseyhightower/envconfig"
 )
 
 func main() {
-	
+	var s models.Specification
+	err := envconfig.Process("landco", &s)
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+
+
 	db := models.NewMongoDB()
 
 	// Lets set some routes
@@ -31,6 +38,7 @@ func main() {
 	// root
 	router.Get("/", commonHandlers.ThenFunc(appH.HomeHandler))
 	router.Get("/api/1.0/acct/ping", commonHandlers.ThenFunc(appA.Ping))
+	router.Get("/api/1.0/dns/register", commonHandlers.ThenFunc(appA.DnsRegister))
 
 
 
@@ -63,11 +71,12 @@ func main() {
 
 
 
-	log.Println("API Starting on Port:8002...")
-
-	http.ListenAndServe(":8002", router)
+	log.Println("API Starting on Port:",s.Port,"...")
 
 
+	log.Fatal(http.ListenAndServe(":8002", router))
+
+	log.Println("API Stopped")
 
 
 }

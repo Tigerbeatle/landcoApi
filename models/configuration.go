@@ -30,6 +30,7 @@ type Specification struct {
 	Database	string
 	Username	string
 	Password	string
+	Port	string
 }
 
 

@@ -6,9 +6,7 @@ import (
 )
 
 
-type ControlContet struct {
-	Db mongo.Database
-}
+
 
 type ProfileRepo struct {
 	Coll *mongo.Collection

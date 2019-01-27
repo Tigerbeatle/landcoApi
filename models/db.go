@@ -20,12 +20,12 @@ func NewMongoDB() *DB {
 
 
 	var s Specification
-	err := envconfig.Process("myapp", &s)
+	err := envconfig.Process("landco", &s)
 	if err != nil {
 		log.Fatal(err.Error())
 	}
 
-	//client, err := mongo.Connect(context.Background(), "mongodb://localhost:27017", nil)
+	fmt.Println("Using Database:",s.Database)
 
 	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
 	client, err := mongo.Connect(ctx, "mongodb://localhost:27017")
@@ -37,26 +37,9 @@ func NewMongoDB() *DB {
 		log.Fatal(err)
 	}
 
-	fmt.Println("Connected to MongoDB!")
-
 	db := client.Database(s.Database)
 
-	/*
-	// Pull in the configuration.
-	var mongoConfig connstring.ConnString
-	if err := envconfig.Process("mgo", &mongoConfig); err != nil {
-		log.Fatalf("Startup Err")
-		//return err
-	}
+	fmt.Println("Connected to MongoDB!")
 
-	// set up conn to mongoHelper
-	client, err := mongo.NewClientFromConnString(mongoConfig)
-	if err != nil { log.Fatal(err) }
-	// Now connect to the db
-	err = client.Connect(context.TODO())
-	if err != nil { log.Fatal(err) }
-
-	db := client.Database(mongoConfig.Database)
-*/
 	return &DB{db}
 }
