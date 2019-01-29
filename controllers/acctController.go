@@ -32,6 +32,9 @@ func (c *AccountContext) DnsRegister(w http.ResponseWriter, r *http.Request){
 		log.Println(err)
 	}
 
+	o := r.Header.Get("X-SecondLife-Object-Key")
+
+	fmt.Println("o:",o)
 	fmt.Println("r:",r)
 	fmt.Println("b:",b)
 	tt := json.NewDecoder(r.Body).Decode(dnsEntry)
@@ -47,7 +50,8 @@ func (c *AccountContext) DnsRegister(w http.ResponseWriter, r *http.Request){
 	removeTarget, _ := strconv.ParseBool(q.Get("removeTarget"))
 	blocked, _ := strconv.ParseBool(q.Get("blocked"))
 
-	dnsEntry.SerialNumber = q.Get("serialNumber")
+	//dnsEntry.SerialNumber = q.Get("serialNumber")
+	dnsEntry.SerialNumber = r.Header.Get("X-SecondLife-Object-Key")
 	dnsEntry.Language = q.Get("language")
 	dnsEntry.Version = version
 	dnsEntry.AliveTestCount = aliveTestCount
