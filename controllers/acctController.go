@@ -25,6 +25,16 @@ func (c *AccountContext) Ping(w http.ResponseWriter, r *http.Request) {
 func (c *AccountContext) DnsRegister(w http.ResponseWriter, r *http.Request){
 	dnsEntry := models.DnsEntry{}
 
+
+	decoder := json.NewDecoder(r.Body)
+	var t dnsEntry
+	err := decoder.Decode(&t)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println("****************",t.Parcel)
+
+
 	tt := json.NewDecoder(r.Body).Decode(dnsEntry)
 	fmt.Println("#######---#########-dnsEntry:",dnsEntry)
 
