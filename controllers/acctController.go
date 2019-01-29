@@ -24,6 +24,8 @@ func (c *AccountContext) Ping(w http.ResponseWriter, r *http.Request) {
 
 func (c *AccountContext) DnsRegister(w http.ResponseWriter, r *http.Request){
 	dnsEntry := models.DnsEntry{}
+
+	tt := json.NewDecoder(r.Body).Decode(dnsEntry)
 	q := r.URL.Query()
 
 
@@ -37,8 +39,7 @@ func (c *AccountContext) DnsRegister(w http.ResponseWriter, r *http.Request){
 
 	fmt.Println("o:",o)
 	fmt.Println("r:",r)
-	fmt.Println("b:",b)
-	tt := json.NewDecoder(r.Body).Decode(dnsEntry)
+	fmt.Println("+++++b:",b)
 
 
 	fmt.Println("r.Body:",r.Body)
