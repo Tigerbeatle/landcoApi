@@ -27,12 +27,14 @@ func (c *AccountContext) DnsRegister(w http.ResponseWriter, r *http.Request){
 
 fmt.Println("In DnsRegstier")
 	decoder := json.NewDecoder(r.Body)
+	fmt.Println("**************** r.Body",r.Body)
+	fmt.Println("**************** decoder",decoder)
 	var t models.DnsEntry
 	err := decoder.Decode(&t)
 	if err != nil {
 		log.Println(err)
 	}
-	fmt.Println("****************",t.Parcel)
+	fmt.Println("**************** t.Parcel",t.Parcel)
 
 
 	tt := json.NewDecoder(r.Body).Decode(dnsEntry)
