@@ -27,10 +27,11 @@ func (c *AccountContext) DnsRegister(w http.ResponseWriter, r *http.Request){
 	q := r.URL.Query()
 
 
-	b, err := ioutil.ReadAll(r.Body)
+	b, err := ioutil.ReadAll(r.GetBody)
 	if err != nil {
 		log.Println(err)
 	}
+
 
 	o := r.Header.Get("X-SecondLife-Object-Key")
 
