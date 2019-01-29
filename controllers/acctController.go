@@ -25,8 +25,13 @@ func (c *AccountContext) DnsRegister(w http.ResponseWriter, r *http.Request){
 	q := r.URL.Query()
 
 
+	tt := json.NewDecoder(r.Body).Decode(dnsEntry)
 
-	fmt.Println("------q:",r.Body)
+
+	fmt.Println("r.Body:",r.Body)
+	fmt.Println("json.NewDecoder(r.Body):",json.NewDecoder(r.Body))
+	fmt.Println("tt:",tt)
+	fmt.Println("dnsEntry:",dnsEntry)
 
 	version, _ := strconv.ParseFloat(q.Get("version"), 32)
 	aliveTestCount, _ := strconv.Atoi(q.Get("aliveTestCount"))
