@@ -7,6 +7,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"strconv"
+	"io/ioutil"
+	"log"
 )
 
 type AccountContext struct {
@@ -25,6 +27,12 @@ func (c *AccountContext) DnsRegister(w http.ResponseWriter, r *http.Request){
 	q := r.URL.Query()
 
 
+	b, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		log.Println(err)
+	}
+
+	fmt.Println("b:",b)
 	tt := json.NewDecoder(r.Body).Decode(dnsEntry)
 
 
