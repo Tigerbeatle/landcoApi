@@ -34,7 +34,7 @@ func RecoverHandler(next http.Handler) http.Handler {
 
 func AcceptHandler(next http.Handler) http.Handler {
 	fn := func(w http.ResponseWriter, r *http.Request) {
-		fmt.Println("HEADERS:",r)
+		//fmt.Println("HEADERS:",r)
 		//fmt.Println("r.URL.Path = ", r.URL.Path)
 		//fmt.Println("r.Header Accept = ", r.Header.Get("Accept"))
 		//fmt.Println("r.Header Authorization = ", r.Header.Get("Authorization"))
