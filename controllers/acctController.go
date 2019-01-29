@@ -58,11 +58,12 @@ func (c *AccountContext) DnsRegister(w http.ResponseWriter, r *http.Request){
 	dnsEntry.RemoveTarget = removeTarget
 	dnsEntry.Blocked = blocked
 	dnsEntry.AliveTestStatus = q.Get("aliveTestStatus")
-	dnsEntry.Owner.Name = q.Get("ownerName")
-	dnsEntry.Owner.UUID = q.Get("ownerUUID")
+	dnsEntry.Owner.Name = r.Header.Get("X-SecondLife-Owner-Name")
+	dnsEntry.Owner.UUID = r.Header.Get("X-SecondLife-Owner-Key")
 	dnsEntry.Parcel.Surl = q.Get("parcelSurl")
 	dnsEntry.Parcel.Url = q.Get("parcelUrl")
 	dnsEntry.Parcel.Name = q.Get("parcelName")
+	dnsEntry.Region = r.Header.Get("X-SecondLife-Region")
 
 	fmt.Println("------dnsEntry:",dnsEntry)
 	basic := models.BasicJSONReturn{"LandcoAPI", "200", "DNS-Registered"}
