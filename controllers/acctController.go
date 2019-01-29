@@ -24,6 +24,8 @@ func (c *AccountContext) DnsRegister(w http.ResponseWriter, r *http.Request){
 	dnsEntry := models.DnsEntry{}
 	q := r.URL.Query()
 
+	fmt.Println("------q:",q)
+
 	version, _ := strconv.ParseFloat(q.Get("version"), 32)
 	aliveTestCount, _ := strconv.Atoi(q.Get("aliveTestCount"))
 	removeTarget, _ := strconv.ParseBool(q.Get("removeTarget"))
