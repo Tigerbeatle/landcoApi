@@ -27,7 +27,7 @@ func (c *AccountContext) DnsRegister(w http.ResponseWriter, r *http.Request){
 
 
 	decoder := json.NewDecoder(r.Body)
-	var t dnsEntry
+	var t models.DnsEntry{}
 	err := decoder.Decode(&t)
 	if err != nil {
 		panic(err)
