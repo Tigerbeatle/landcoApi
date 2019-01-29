@@ -80,9 +80,9 @@ func (r *DnsRepo) Update(e DnsEntry)  *mongo.UpdateResult{
 		{"$set", bson.D{
 			{"aliveTestStatus", e.AliveTestStatus},
 			{"aliveTestCount", e.AliveTestCount},
-			{"parcel.Surl", e.Parcel.Surl},
-			{"parcel.Url", e.Parcel.Url},
-			{"parcel.Name", e.Parcel.Name},
+			{"parcel.surl", e.Parcel.Surl},
+			{"parcel.url", e.Parcel.Url},
+			{"parcel.name", e.Parcel.Name},
 		}},
 	}
 
