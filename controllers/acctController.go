@@ -30,7 +30,7 @@ fmt.Println("In DnsRegstier")
 	var t models.DnsEntry
 	err := decoder.Decode(&t)
 	if err != nil {
-		panic(err)
+		log.Println(err)
 	}
 	fmt.Println("****************",t.Parcel)
 
