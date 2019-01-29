@@ -45,7 +45,7 @@ type (
 		AliveTestStatus     string  `json:"aliveTestStatus" bson:"aliveTestStatus"`
 		Owner               Person  `json:"owner"           bson:"owner"`
 		Parcel              Parcel  `json:"parcel"          bson:"parcel"`
-		Region              Parcel  `json:"region"          bson:"regio"`
+		Region              string  `json:"region"          bson:"regio"`
 	}
 
 
