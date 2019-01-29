@@ -45,7 +45,7 @@ type (
 		AliveTestStatus     string  `json:"aliveTestStatus" bson:"aliveTestStatus"`
 		Owner               Person  `json:"owner"           bson:"owner"`
 		Parcel              Parcel  `json:"parcel"          bson:"parcel"`
-		Region              string  `json:"region"          bson:"regio"`
+		Region              string  `json:"region"          bson:"region"`
 	}
 
 
@@ -80,9 +80,9 @@ func (r *DnsRepo) Update(e DnsEntry)  *mongo.UpdateResult{
 		{"$set", bson.D{
 			{"aliveTestStatus", e.AliveTestStatus},
 			{"aliveTestCount", e.AliveTestCount},
-			{"parcel.parcelSurl", e.Parcel.Surl},
-			{"parcel.parcelUrl", e.Parcel.Url},
-			{"parcel.parcelName", e.Parcel.Name},
+			{"parcel.Surl", e.Parcel.Surl},
+			{"parcel.Url", e.Parcel.Url},
+			{"parcel.Name", e.Parcel.Name},
 		}},
 	}
 
