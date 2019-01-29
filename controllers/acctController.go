@@ -32,6 +32,7 @@ func (c *AccountContext) DnsRegister(w http.ResponseWriter, r *http.Request){
 		log.Println(err)
 	}
 
+	fmt.Println("r:",r)
 	fmt.Println("b:",b)
 	tt := json.NewDecoder(r.Body).Decode(dnsEntry)
 
