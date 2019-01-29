@@ -42,6 +42,7 @@ func (c *AccountContext) DnsRegister(w http.ResponseWriter, r *http.Request){
 	dnsEntry.Parcel.Url = q.Get("parcelUrl")
 	dnsEntry.Parcel.Name = q.Get("parcelName")
 
+	fmt.Println("------dnsEntry:",dnsEntry)
 	basic := models.BasicJSONReturn{"LandcoAPI", "200", "DNS-Registered"}
 
 	repo := models.DnsRepo{c.Db.Collection("dns")}
