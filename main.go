@@ -38,9 +38,9 @@ func main() {
 	// root
 	router.Get("/", commonHandlers.ThenFunc(appH.HomeHandler))
 	router.Get("/api/1.0/acct/ping", commonHandlers.ThenFunc(appA.Ping))
-	//router.Get("/api/1.0/dns/register", commonHandlers.ThenFunc(appA.DnsRegister))
+	router.Get("/api/1.0/dns/register", commonHandlers.ThenFunc(appA.DnsRegister))
 
-	router.Get("/api/1.0/dns/register", commonHandlers.Append(middleware.BodyHandler(models.DnsEntry{})).ThenFunc(appA.DnsRegister))
+	//router.Get("/api/1.0/dns/register", commonHandlers.Append(middleware.BodyHandler(models.DnsEntry{})).ThenFunc(appA.DnsRegister))
 
 
 
