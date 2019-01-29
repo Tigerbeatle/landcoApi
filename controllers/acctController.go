@@ -26,6 +26,8 @@ func (c *AccountContext) DnsRegister(w http.ResponseWriter, r *http.Request){
 	dnsEntry := models.DnsEntry{}
 
 	tt := json.NewDecoder(r.Body).Decode(dnsEntry)
+	fmt.Println("#######---#########-dnsEntry:",dnsEntry)
+
 	q := r.URL.Query()
 
 
