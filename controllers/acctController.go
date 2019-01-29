@@ -27,7 +27,7 @@ func (c *AccountContext) DnsRegister(w http.ResponseWriter, r *http.Request){
 	q := r.URL.Query()
 
 
-	b, err := ioutil.ReadAll(r.GetBody)
+	b, err := ioutil.ReadAll(r.Body)
 	if err != nil {
 		log.Println(err)
 	}
