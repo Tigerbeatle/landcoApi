@@ -62,18 +62,14 @@ fmt.Println("In DnsRegstier")
 	fmt.Println("dnsEntry:",dnsEntry)
 
 	version, _ := strconv.ParseFloat(q.Get("version"), 32)
-	aliveTestCount, _ := strconv.Atoi(q.Get("aliveTestCount"))
-	removeTarget, _ := strconv.ParseBool(q.Get("removeTarget"))
-	blocked, _ := strconv.ParseBool(q.Get("blocked"))
 
-	//dnsEntry.SerialNumber = q.Get("serialNumber")
 	dnsEntry.SerialNumber = r.Header.Get("X-SecondLife-Object-Key")
-	dnsEntry.Language = q.Get("language")
+	dnsEntry.Language = "English"
 	dnsEntry.Version = version
-	dnsEntry.AliveTestCount = aliveTestCount
-	dnsEntry.RemoveTarget = removeTarget
-	dnsEntry.Blocked = blocked
-	dnsEntry.AliveTestStatus = q.Get("aliveTestStatus")
+	dnsEntry.AliveTestCount = 0
+	dnsEntry.RemoveTarget = "no"
+	dnsEntry.Blocked = false
+	dnsEntry.AliveTestStatus = "Pass"
 	dnsEntry.Owner.Name = r.Header.Get("X-SecondLife-Owner-Name")
 	dnsEntry.Owner.UUID = r.Header.Get("X-SecondLife-Owner-Key")
 	dnsEntry.Parcel.Surl = q.Get("parcelSurl")
