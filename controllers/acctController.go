@@ -61,9 +61,10 @@ fmt.Println("In DnsRegstier")
 	fmt.Println("tt:",tt)
 	fmt.Println("dnsEntry:",dnsEntry)
 
-	version, _ := strconv.ParseFloat(q.Get("version"), 32)
+	version, _ := strconv.ParseFloat(r.Header.Get("version"), 32)
 
 	dnsEntry.SerialNumber = r.Header.Get("X-SecondLife-Object-Key")
+	dnsEntry.Type = r.Header.Get("type")
 	dnsEntry.Language = "English"
 	dnsEntry.Version = version
 	dnsEntry.AliveTestCount = 0
@@ -72,9 +73,9 @@ fmt.Println("In DnsRegstier")
 	dnsEntry.AliveTestStatus = "Pass"
 	dnsEntry.Owner.Name = r.Header.Get("X-SecondLife-Owner-Name")
 	dnsEntry.Owner.UUID = r.Header.Get("X-SecondLife-Owner-Key")
-	dnsEntry.Parcel.Surl = q.Get("parcelSurl")
-	dnsEntry.Parcel.Url = q.Get("parcelUrl")
-	dnsEntry.Parcel.Name = q.Get("parcelName")
+	dnsEntry.Parcel.Surl =  r.Header.Get("parcelSurl")
+	dnsEntry.Parcel.Url = r.Header.Get("parcelUrl")
+	dnsEntry.Parcel.Name = r.Header.Get("parcelName")
 	dnsEntry.Region = r.Header.Get("X-SecondLife-Region")
 
 	fmt.Println("------dnsEntry:",dnsEntry)
