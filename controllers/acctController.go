@@ -7,8 +7,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"strconv"
-	"io/ioutil"
-	"log"
 )
 
 type AccountContext struct {
@@ -26,40 +24,7 @@ func (c *AccountContext) DnsRegister(w http.ResponseWriter, r *http.Request){
 	dnsEntry := models.DnsEntry{}
 
 fmt.Println("In DnsRegstier")
-	decoder := json.NewDecoder(r.Body)
-	fmt.Println("**************** r.Body",r.Body)
-	fmt.Println("**************** decoder",decoder)
-	var t models.DnsEntry
-	err := decoder.Decode(&t)
-	if err != nil {
-		log.Println(err)
-	}
-	fmt.Println("**************** t.Parcel",t.Parcel)
 
-
-	tt := json.NewDecoder(r.Body).Decode(dnsEntry)
-	fmt.Println("#######---#########-dnsEntry:",dnsEntry)
-
-	q := r.URL.Query()
-
-
-	b, err := ioutil.ReadAll(r.Body)
-	if err != nil {
-		log.Println(err)
-	}
-
-
-	o := r.Header.Get("X-SecondLife-Object-Key")
-
-	fmt.Println("o:",o)
-	fmt.Println("r:",r)
-	fmt.Println("+++++b:",b)
-
-
-	fmt.Println("r.Body:",r.Body)
-	fmt.Println("json.NewDecoder(r.Body):",json.NewDecoder(r.Body))
-	fmt.Println("tt:",tt)
-	fmt.Println("dnsEntry:",dnsEntry)
 
 	version, _ := strconv.ParseFloat(r.Header.Get("version"), 32)
 
