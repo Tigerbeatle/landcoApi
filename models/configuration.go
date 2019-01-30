@@ -35,7 +35,6 @@ type Specification struct {
 
 
 
-
 /*
 func ValidateToken(tokenStr string) (interface{}, error){
 	hmacSecretString := GetSecret()

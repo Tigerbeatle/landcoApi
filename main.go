@@ -26,8 +26,10 @@ func main() {
 	commonHandlers := alice.New(middleware.RecoverHandler, middleware.AcceptHandler)
 	router := routes.NewRouter()
 
+
 	appA := controller.AccountContext{db.Database}
 	appH := controller.HomeContext{db.Database}
+	appB := controller.BoxContext{db.Database}
 	//appI := controller.InvPublicContext{db.Database}
 	//appIPi := controller.InvPrivateContext{db.Database}
 
@@ -38,10 +40,11 @@ func main() {
 	// root
 	router.Get("/", commonHandlers.ThenFunc(appH.HomeHandler))
 	router.Get("/api/1.0/acct/ping", commonHandlers.ThenFunc(appA.Ping))
-	router.Get("/api/1.0/dns/register", commonHandlers.ThenFunc(appA.DnsRegister))
-	router.Post("/api/1.0/dns/register", commonHandlers.ThenFunc(appA.DnsRegister))
+	//router.Get("/api/1.0/dns/register", commonHandlers.ThenFunc(appA.DnsRegister))
 
-	//router.Post("/api/1.0/dns/register", commonHandlers.Append(middleware.BodyHandler(models.DnsEntry{})).ThenFunc(appA.DnsRegister))
+	router.Post("/api/1.0/dns/register2", commonHandlers.ThenFunc(appA.DnsRegister2))
+
+	//router.Post("/api/1.0/box/setPrice", commonHandlers.ThenFunc(appB.SetPrice))
 
 
 

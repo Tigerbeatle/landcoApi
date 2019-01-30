@@ -7,6 +7,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"strconv"
+	"log"
+	"github.com/gorilla/schema"
 )
 
 type AccountContext struct {
@@ -22,9 +24,6 @@ func (c *AccountContext) Ping(w http.ResponseWriter, r *http.Request) {
 
 func (c *AccountContext) DnsRegister(w http.ResponseWriter, r *http.Request){
 	dnsEntry := models.DnsEntry{}
-
-fmt.Println("In DnsRegstier")
-
 
 	version, _ := strconv.ParseFloat(r.Header.Get("version"), 32)
 
@@ -44,6 +43,61 @@ fmt.Println("In DnsRegstier")
 	dnsEntry.Region = r.Header.Get("X-SecondLife-Region")
 
 	fmt.Println("------dnsEntry:",dnsEntry)
+	basic := models.BasicJSONReturn{"LandcoAPI", "200", "DNS-Registered"}
+
+	repo := models.DnsRepo{c.Db.Collection("dns")}
+	if(repo.Exists(dnsEntry)){ //update
+		updateResult := repo.Update(dnsEntry)
+		if(updateResult.MatchedCount == 0){
+			basic = models.BasicJSONReturn{"LandcoAPI", "500", "ErrInternalServer"}
+		}
+		fmt.Printf("Matched %v documents and updated %v documents.\n", updateResult.MatchedCount, updateResult.ModifiedCount)
+
+	}else{ //insert
+		insertResult := repo.Insert(dnsEntry)
+		if(insertResult.InsertedID == ""){
+			basic = models.BasicJSONReturn{"LandcoAPI", "500", "ErrInternalServer"}
+		}
+		fmt.Println("Inserted a single document: ", insertResult.InsertedID)
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(basic)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+func (c *AccountContext) DnsRegister2(w http.ResponseWriter, r *http.Request){
+
+
+	err := r.ParseForm()
+	if err != nil {
+		log.Println(err)
+	}
+
+	var dnsEntry models.DnsEntry
+	var decoder = schema.NewDecoder()
+	err = decoder.Decode(&dnsEntry, r.PostForm)
+	if err != nil {
+		log.Println(err)
+	}
+
+	fmt.Println("dnsEntry:",dnsEntry)
+	fmt.Println("Language:",dnsEntry.Language)
+
+
+
 	basic := models.BasicJSONReturn{"LandcoAPI", "200", "DNS-Registered"}
 
 	repo := models.DnsRepo{c.Db.Collection("dns")}
