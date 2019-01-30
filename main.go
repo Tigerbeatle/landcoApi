@@ -40,9 +40,7 @@ func main() {
 	// root
 	router.Get("/", commonHandlers.ThenFunc(appH.HomeHandler))
 	router.Get("/api/1.0/acct/ping", commonHandlers.ThenFunc(appA.Ping))
-	//router.Get("/api/1.0/dns/register", commonHandlers.ThenFunc(appA.DnsRegister))
-
-	router.Post("/api/1.0/dns/register2", commonHandlers.ThenFunc(appA.DnsRegister2))
+	router.Post("/api/1.0/dns/register", commonHandlers.ThenFunc(appA.DnsRegister))
 
 	router.Post("/api/1.0/box/setPrice", commonHandlers.ThenFunc(appB.SetPrice))
 
