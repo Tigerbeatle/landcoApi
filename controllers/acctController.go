@@ -67,7 +67,7 @@ fmt.Println("In DnsRegstier")
 	dnsEntry.Language = "English"
 	dnsEntry.Version = version
 	dnsEntry.AliveTestCount = 0
-	dnsEntry.RemoveTarget = "no"
+	dnsEntry.RemoveTarget = false
 	dnsEntry.Blocked = false
 	dnsEntry.AliveTestStatus = "Pass"
 	dnsEntry.Owner.Name = r.Header.Get("X-SecondLife-Owner-Name")
