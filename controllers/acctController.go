@@ -25,8 +25,7 @@ func (c *AccountContext) Ping(w http.ResponseWriter, r *http.Request) {
 
 
 func (c *AccountContext) DnsRegister(w http.ResponseWriter, r *http.Request){
-
-
+	fmt.Println("Got Here")
 	err := r.ParseForm()
 	if err != nil {
 		log.Println(err)
@@ -44,14 +43,10 @@ func (c *AccountContext) DnsRegister(w http.ResponseWriter, r *http.Request){
 	fmt.Println("Language:",dnsEntry.Language)
 
 
-
-
 	dnsEntry.SerialNumber = r.Header.Get("X-SecondLife-Object-Key")
 	dnsEntry.Owner.Name = r.Header.Get("X-SecondLife-Owner-Name")
 	dnsEntry.Owner.UUID = r.Header.Get("X-SecondLife-Owner-Key")
 	dnsEntry.Region = r.Header.Get("X-SecondLife-Region")
-
-
 
 
 	basic := models.BasicJSONReturn{"LandcoAPI", "200", "DNS-Registered"}
