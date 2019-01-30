@@ -99,6 +99,15 @@ func (c *AccountContext) DnsRegister2(w http.ResponseWriter, r *http.Request){
 
 
 
+
+	dnsEntry.SerialNumber = r.Header.Get("X-SecondLife-Object-Key")
+	dnsEntry.Owner.Name = r.Header.Get("X-SecondLife-Owner-Name")
+	dnsEntry.Owner.UUID = r.Header.Get("X-SecondLife-Owner-Key")
+	dnsEntry.Region = r.Header.Get("X-SecondLife-Region")
+
+
+
+
 	basic := models.BasicJSONReturn{"LandcoAPI", "200", "DNS-Registered"}
 
 	repo := models.DnsRepo{c.Db.Collection("dns")}
