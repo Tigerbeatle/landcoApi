@@ -86,6 +86,7 @@ func (c *AccountContext) DnsRegister2(w http.ResponseWriter, r *http.Request){
 		log.Println(err)
 	}
 
+	fmt.Println("**** R.PostForm: ", r.PostForm)
 	var dnsEntry models.DnsEntry
 	var decoder = schema.NewDecoder()
 	err = decoder.Decode(&dnsEntry, r.PostForm)
