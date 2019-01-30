@@ -25,23 +25,17 @@ func (c *AccountContext) Ping(w http.ResponseWriter, r *http.Request) {
 
 
 func (c *AccountContext) DnsRegister(w http.ResponseWriter, r *http.Request){
-	fmt.Println("Got Here")
 	err := r.ParseForm()
 	if err != nil {
 		log.Println(err)
 	}
 
-	fmt.Println("**** R.PostForm: ", r.PostForm)
 	var dnsEntry models.DnsEntry
 	var decoder = schema.NewDecoder()
 	err = decoder.Decode(&dnsEntry, r.PostForm)
 	if err != nil {
 		log.Println(err)
 	}
-
-	fmt.Println("dnsEntry:",dnsEntry)
-	fmt.Println("Language:",dnsEntry.Language)
-
 
 	dnsEntry.SerialNumber = r.Header.Get("X-SecondLife-Object-Key")
 	dnsEntry.Owner.Name = r.Header.Get("X-SecondLife-Owner-Name")
