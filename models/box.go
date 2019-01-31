@@ -36,12 +36,12 @@ func (r *BoxRepo) Exists(e Box) bool {
 		log.Println(err)
 		return false
 	}
-	fmt.Printf("Found a single document: %+v\n", result)
+	//fmt.Printf("Found a single document: %+v\n", result)
 	return true
 }
 
 func (r *BoxRepo) Insert(e Box)  *mongo.InsertOneResult{
-	fmt.Println("box:",e)
+	//fmt.Println("box:",e)
 	insertResult, err := r.Coll.InsertOne(context.TODO(), e)
 	if err != nil {
 		log.Println(err)
@@ -85,5 +85,5 @@ func (r *BoxRepo) Delete(serialNumber string)  { // NOTE: UNTESTED
 	if err != nil {
 		log.Println(err)
 	}
-	fmt.Printf("Deleted %v document in the collection\n",deleteResults.DeletedCount)
+	//fmt.Printf("Deleted %v document in the collection\n",deleteResults.DeletedCount)
 }

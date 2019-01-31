@@ -31,7 +31,7 @@ func (c *BoxContext) SetPrice(w http.ResponseWriter, r *http.Request){
 		log.Println(err)
 	}
 
-	fmt.Println("print1:",box.Price1)
+	//fmt.Println("print1:",box.Price1)
 
 
 
@@ -66,18 +66,18 @@ func (c *BoxContext) UpdateBox(w http.ResponseWriter, r *http.Request){
 	}
 
 	var serial = r.FormValue("serialNumber")
-	fmt.Println("serial:",serial)
+	//fmt.Println("serial:",serial)
 // get pricing data for serialnumber
 	boxRepo := models.BoxRepo{c.Db.Collection("box")}
 	box := boxRepo.Get(r.FormValue("serialNumber"))
 
-	fmt.Println("box:",box)
+	//fmt.Println("box:",box)
 
 
 	dnsRepo := models.DnsRepo{c.Db.Collection("dns")}
 	dns := dnsRepo.Get(r.FormValue("serialNumber"))
 
-	fmt.Println("dns:",dns)
+	fmt.Println("ns.Parcel.Url:",dns.Parcel.Url)
 
 
 	jsonStr, err := json.Marshal(box)
@@ -94,7 +94,6 @@ func (c *BoxContext) UpdateBox(w http.ResponseWriter, r *http.Request){
 		return
 	}
 
-	req.Header.Set("X-Custom-Header", "myvalue")
 	req.Header.Set("Content-Type", "application/json")
 
 	client := &http.Client{}
