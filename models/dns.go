@@ -93,18 +93,22 @@ func (r *DnsRepo) Update(e DnsEntry)  *mongo.UpdateResult{
 	return updateResult
 }
 
-func (r *DnsRepo) Get(e DnsEntry)  DnsEntry{  // NOTE: UNTESTED
+func (r *DnsRepo) Get(serialNumber string)  DnsEntry {  // NOTE: UNTESTED
+
+fmt.Println("Inside Dns Get serialNumber:",serialNumber)
 	var result DnsEntry
-	filter := bson.D{{"serialNumber", e.SerialNumber}}
+	filter := bson.D{{"serialNumber", serialNumber}}
 	err := r.Coll.FindOne(context.TODO(), filter).Decode(&result)
 	if err != nil {
 		log.Println(err)
 	}
-	//fmt.Printf("Found a single document: %+v\n", result)
+	fmt.Printf("Found a single document: %+v\n", result)
 	return result
 }
-func (r *DnsRepo) Delete(e DnsEntry)  { // NOTE: UNTESTED
-	filter := bson.D{{"serialNumber", e.SerialNumber}}
+
+
+func (r *DnsRepo) Delete(serialNumber string)  { // NOTE: UNTESTED
+	filter := bson.D{{"serialNumber", serialNumber}}
 	deleteResults, err := r.Coll.DeleteOne(context.TODO(), filter)
 	if err != nil {
 		log.Println(err)

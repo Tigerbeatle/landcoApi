@@ -44,6 +44,8 @@ func main() {
 
 	router.Post("/api/1.0/box/setPrice", commonHandlers.ThenFunc(appB.SetPrice))
 
+	router.Post("/api/1.0/box/updateBox", commonHandlers.ThenFunc(appB.UpdateBox))
+
 
 
 
