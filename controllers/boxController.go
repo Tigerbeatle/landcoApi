@@ -69,13 +69,13 @@ func (c *BoxContext) UpdateBox(w http.ResponseWriter, r *http.Request){
 	//fmt.Println("serial:",serial)
 // get pricing data for serialnumber
 	boxRepo := models.BoxRepo{c.Db.Collection("box")}
-	box := boxRepo.Get(r.FormValue("serialNumber"))
+	box := boxRepo.Get(serial)
 
 	//fmt.Println("box:",box)
 
 
 	dnsRepo := models.DnsRepo{c.Db.Collection("dns")}
-	dns := dnsRepo.Get(r.FormValue("serialNumber"))
+	dns := dnsRepo.Get(serial)
 
 	fmt.Println("ns.Parcel.Url:",dns.Parcel.Url)
 
