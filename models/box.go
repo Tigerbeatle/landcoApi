@@ -85,5 +85,5 @@ func (r *BoxRepo) Delete(serialNumber string)  { // NOTE: UNTESTED
 	if err != nil {
 		log.Println(err)
 	}
-	//fmt.Printf("Deleted %v document in the collection\n",deleteResults.DeletedCount)
+	fmt.Printf("Deleted %v document in the collection\n",deleteResults.DeletedCount)
 }
