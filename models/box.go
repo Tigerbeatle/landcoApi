@@ -82,6 +82,7 @@ func (r *BoxRepo) Delete(serialNumber string)  { // NOTE: UNTESTED
 }
 
 func (r *BoxRepo) CreateDefault(e DnsEntry) *mongo.InsertOneResult{
+	fmt.Println("Inside CreateDefault")
 	var box Box
 	box.SerialNumber = e.SerialNumber
 	box.ProfitShare = false
@@ -90,5 +91,7 @@ func (r *BoxRepo) CreateDefault(e DnsEntry) *mongo.InsertOneResult{
 	if err != nil {
 		log.Println(err)
 	}
+
+	fmt.Println("box insertResult:", insertResult)
 	return insertResult
 }

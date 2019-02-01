@@ -60,7 +60,7 @@ func (c *AccountContext) DnsRegister(w http.ResponseWriter, r *http.Request){
 		}
 		fmt.Println("Inserted a single document: ", insertResult.InsertedID)
 
-
+fmt.Println("Now create the defaul box")
 
 		// Send createDefault Box request
 		boxRepo := models.BoxRepo{c.Db.Collection("box")}
