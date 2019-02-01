@@ -59,6 +59,17 @@ func (c *AccountContext) DnsRegister(w http.ResponseWriter, r *http.Request){
 			basic = models.BasicJSONReturn{"LandcoAPI", "500", "ErrInternalServer"}
 		}
 		fmt.Println("Inserted a single document: ", insertResult.InsertedID)
+
+
+
+		// Send createDefault Box request
+		boxRepo := models.BoxRepo{c.Db.Collection("box")}
+		insertResult = boxRepo.CreateDefault(dnsEntry)
+		if(insertResult.InsertedID == ""){
+			basic = models.BasicJSONReturn{"LandcoAPI", "500", "ErrInternalServer"}
+		}
+		fmt.Println("Inserted a single box document: ", insertResult.InsertedID)
+
 	}
 
 	w.Header().Set("Content-Type", "application/json")

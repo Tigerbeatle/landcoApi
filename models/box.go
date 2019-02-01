@@ -80,3 +80,15 @@ func (r *BoxRepo) Delete(serialNumber string)  { // NOTE: UNTESTED
 	}
 	fmt.Printf("Deleted %v document in the collection\n",deleteResults.DeletedCount)
 }
+
+func (r *BoxRepo) CreateDefault(e DnsEntry) *mongo.InsertOneResult{
+	var box Box
+	box.SerialNumber = e.SerialNumber
+	box.ProfitShare = false
+
+	insertResult, err := r.Coll.InsertOne(context.TODO(), box)
+	if err != nil {
+		log.Println(err)
+	}
+	return insertResult
+}

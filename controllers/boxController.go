@@ -109,8 +109,8 @@ func (c *BoxContext) UpdateBox(w http.ResponseWriter, r *http.Request){
 	fmt.Println("response Body:", string(body))
 
 
-
 	basic := models.BasicJSONReturn{"LandcoAPI", "200", "Box Updated"}
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(basic)
 }
+
