@@ -14,17 +14,20 @@ type BoxRepo struct {
 }
 
 
+
 type (
+	Price struct {
+		Amount	int	`json:"amount"  bson:"amount"`
+		Duration float32 `json:"duration"  bson:"duration"`
+	}
 
 	Box struct {
-		Price1      int     `json:"price1"  bson:"price1"`
-		Price2      int     `json:"price2"  bson:"price2"`
-		Price3      int     `json:"price3"  bson:"price3"`
-		Price4      int     `json:"price4"  bson:"price4"`
-		SerialNumber    string  `json:"serialNumber"    bson:"serialNumber"`
+		ProfitShare  bool     `json:"profitShare"  bson:"profitShare"`
+		Prices       []Price  `json:"prices" bson:"prices"`
+		SerialNumber string   `json:"serialNumber"    bson:"serialNumber"`
+		Shares       []Person `json:"shares" bson:"shares"`
 	}
 )
-
 
 
 func (r *BoxRepo) Exists(e Box) bool {
@@ -36,12 +39,10 @@ func (r *BoxRepo) Exists(e Box) bool {
 		log.Println(err)
 		return false
 	}
-	//fmt.Printf("Found a single document: %+v\n", result)
 	return true
 }
 
 func (r *BoxRepo) Insert(e Box)  *mongo.InsertOneResult{
-	//fmt.Println("box:",e)
 	insertResult, err := r.Coll.InsertOne(context.TODO(), e)
 	if err != nil {
 		log.Println(err)
@@ -49,23 +50,15 @@ func (r *BoxRepo) Insert(e Box)  *mongo.InsertOneResult{
 	return insertResult
 }
 
-
-func (r *BoxRepo) Update(e Box)  *mongo.UpdateResult{
+func (r *BoxRepo) Replace(e Box)  *mongo.UpdateResult{
 	filter := bson.D{{"serialNumber", e.SerialNumber}}
-	update := bson.D{
-		{"$set", bson.D{
-			{"price1", e.Price1},
-			{"price2", e.Price2},
-			{"price3", e.Price3},
-			{"price4", e.Price4},
-		}},
-	}
+	update := e
 
-	updateResult, err := r.Coll.UpdateOne(context.TODO(), filter, update)
+	replaceResult, err := r.Coll.ReplaceOne(context.TODO(), filter, update)
 	if err != nil {
 		log.Println(err)
 	}
-	return updateResult
+	return replaceResult
 }
 
 func (r *BoxRepo) Get(serialNumber string)  Box{  // NOTE: UNTESTED

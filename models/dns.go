@@ -74,6 +74,8 @@ func (r *DnsRepo) Insert(e DnsEntry)  *mongo.InsertOneResult{
 }
 
 
+
+
 func (r *DnsRepo) Update(e DnsEntry)  *mongo.UpdateResult{
 	filter := bson.D{{"serialNumber", e.SerialNumber}}
 	update := bson.D{
@@ -91,6 +93,17 @@ func (r *DnsRepo) Update(e DnsEntry)  *mongo.UpdateResult{
 		log.Println(err)
 	}
 	return updateResult
+}
+
+func (r *DnsRepo) Replace(e DnsEntry)  *mongo.UpdateResult{
+	filter := bson.D{{"serialNumber", e.SerialNumber}}
+	update := e
+
+	replaceResult, err := r.Coll.ReplaceOne(context.TODO(), filter, update)
+	if err != nil {
+		log.Println(err)
+	}
+	return replaceResult
 }
 
 func (r *DnsRepo) Get(serialNumber string)  DnsEntry {  // NOTE: UNTESTED
