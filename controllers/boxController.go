@@ -96,7 +96,7 @@ func (c *BoxContext) UpdateBox(w http.ResponseWriter, r *http.Request){
 
 	s := fmt.Sprintf("%v", basicRequest)
 	//req, err := http.NewRequest("POST", dns.Parcel.Url, bytes.NewBuffer([]byte(s)))
-	req, err := http.NewRequest("POST", dns.Parcel.Url, bytes.NewBuffer([]s))
+	req, err := http.NewRequest("POST", dns.Parcel.Url, bytes.NewBuffer(s))
 	if err != nil {
 		fmt.Println(err)
 		return
