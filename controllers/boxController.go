@@ -92,9 +92,13 @@ func (c *BoxContext) UpdateBox(w http.ResponseWriter, r *http.Request){
 	//basic := models.BasicJSONReturn{"UpdateBox", "200", string(jsonStr[:len(jsonStr)])}
 	//basic := models.BasicJSONReturn{"UpdateBox", "200", jsonStr}
 
-	//s := fmt.Sprintf("%v", basic)
+	basicRequest := models.BasicJSONRequest{"UpdateBox", jsonStr}
+
+
+
+	s := fmt.Sprintf("%v", basicRequest)
 	//req, err := http.NewRequest("POST", dns.Parcel.Url, bytes.NewBuffer([]byte(s)))
-	req, err := http.NewRequest("POST", dns.Parcel.Url, bytes.NewBuffer(jsonStr))
+	req, err := http.NewRequest("POST", dns.Parcel.Url, bytes.NewBuffer([]byte(s)))
 	if err != nil {
 		fmt.Println(err)
 		return
