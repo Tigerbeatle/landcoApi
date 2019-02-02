@@ -81,12 +81,21 @@ func (c *BoxContext) UpdateBox(w http.ResponseWriter, r *http.Request){
 	dnsRepo := models.DnsRepo{c.Db.Collection("dns")}
 	dns := dnsRepo.Get(serial)
 
-	jsonStr, err := json.Marshal(box)
+
+	var updateBoxRequest models.UpdateBoxRequest
+
+	updateBoxRequest.Box = box
+	updateBoxRequest.RequestType = "UpdateBox"
+
+
+	jsonStr, err := json.Marshal(updateBoxRequest)
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
 	fmt.Println(string(jsonStr))
+
+
 
 
 	//basic := models.BasicJSONReturn{"UpdateBox", "200", string(jsonStr[:len(jsonStr)])}

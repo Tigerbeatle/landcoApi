@@ -15,10 +15,6 @@ type BasicJSONReturn struct {
 	Payload      string          `json:"payLoad"        bson:"payLoad"`
 }
 
-type BasicJSONRequest struct {
-	RequestType   string          `json:"ReturnType"        bson:"ReturnType"`
-	Payload      []byte          `json:"payLoad"        bson:"payLoad"`
-}
 
 type Configuration struct {
 	Secret string

@@ -27,6 +27,11 @@ type (
 		SerialNumber string   `json:"serialNumber"    bson:"serialNumber"`
 		Shares       []Person `json:"shares" bson:"shares"`
 	}
+
+	UpdateBoxRequest struct {
+		RequestType   string
+		Box      Box
+	}
 )
 
 
