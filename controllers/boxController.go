@@ -81,6 +81,8 @@ func (c *BoxContext) UpdateBox(w http.ResponseWriter, r *http.Request){
 	dnsRepo := models.DnsRepo{c.Db.Collection("dns")}
 	dns := dnsRepo.Get(serial)
 
+	// todo add return type, return status to front of json string??
+
 	jsonStr, err := json.Marshal(box)
 	if err != nil {
 		fmt.Println(err)
@@ -88,7 +90,10 @@ func (c *BoxContext) UpdateBox(w http.ResponseWriter, r *http.Request){
 	}
 	//fmt.Println(string(jsonStr))
 
-	req, err := http.NewRequest("POST", dns.Parcel.Url, bytes.NewBuffer(jsonStr))
+	basic := models.BasicJSONReturn{"UpdateBox", "200", jsonStr}
+
+
+	req, err := http.NewRequest("POST", dns.Parcel.Url, bytes.NewBuffer(basic))
 	if err != nil {
 		fmt.Println(err)
 		return
