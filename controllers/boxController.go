@@ -89,15 +89,17 @@ func (c *BoxContext) UpdateBox(w http.ResponseWriter, r *http.Request){
 	//fmt.Println(string(jsonStr))
 
 	//basic := models.BasicJSONReturn{"UpdateBox", "200", string(jsonStr[:len(jsonStr)])}
-	basic := models.BasicJSONReturn{"UpdateBox", "200", jsonStr}
+	//basic := models.BasicJSONReturn{"UpdateBox", "200", jsonStr}
 
-	s := fmt.Sprintf("%v", basic)
-	req, err := http.NewRequest("POST", dns.Parcel.Url, bytes.NewBuffer([]byte(s)))
+	//s := fmt.Sprintf("%v", basic)
+	//req, err := http.NewRequest("POST", dns.Parcel.Url, bytes.NewBuffer([]byte(s)))
+	req, err := http.NewRequest("POST", dns.Parcel.Url, bytes.NewBuffer(jsonStr))
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
 	req.Header.Set("Content-Type", "application/json")
+	req.Header.Set("X-Return-Type", "UpdateBox")
 
 	client := &http.Client{}
 	resp, err := client.Do(req)
@@ -113,7 +115,7 @@ func (c *BoxContext) UpdateBox(w http.ResponseWriter, r *http.Request){
 	fmt.Println("response Body:", string(body))
 
 
-	basic = models.BasicJSONReturn{"UpdateBox", "200", "Box Updated"}
+	basic := models.BasicJSONReturn{"UpdateBox", "200", "Box Updated"}
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(basic)
 }
