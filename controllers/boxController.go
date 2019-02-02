@@ -86,7 +86,7 @@ func (c *BoxContext) UpdateBox(w http.ResponseWriter, r *http.Request){
 		fmt.Println(err)
 		return
 	}
-	//fmt.Println(string(jsonStr))
+	fmt.Println(string(jsonStr))
 
 
 	//basic := models.BasicJSONReturn{"UpdateBox", "200", string(jsonStr[:len(jsonStr)])}
