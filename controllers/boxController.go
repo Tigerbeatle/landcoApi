@@ -47,13 +47,13 @@ func (c *BoxContext) Record(w http.ResponseWriter, r *http.Request){
 		}
 		updateResult := repo.Replace(box)
 		if(updateResult.MatchedCount == 0){
-			basic = models.BasicJSONReturn{"LandcoAPI", "500", "ErrInternalServer"}
+			basic = models.BasicJSONReturn{"Record", "500", "ErrInternalServer"}
 		}
 		fmt.Printf("Matched %v documents and updated %v documents.\n", updateResult.MatchedCount, updateResult.ModifiedCount)
 	}else{ //insert
 		insertResult := repo.Insert(box)
 		if(insertResult.InsertedID == ""){
-			basic = models.BasicJSONReturn{"LandcoAPI", "500", "ErrInternalServer"}
+			basic = models.BasicJSONReturn{"Record", "500", "ErrInternalServer"}
 		}
 		fmt.Println("Inserted a single document: ", insertResult.InsertedID)
 	}
@@ -109,7 +109,7 @@ func (c *BoxContext) UpdateBox(w http.ResponseWriter, r *http.Request){
 	fmt.Println("response Body:", string(body))
 
 
-	basic := models.BasicJSONReturn{"LandcoAPI", "200", "Box Updated"}
+	basic := models.BasicJSONReturn{"UpdateBox", "200", "Box Updated"}
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(basic)
 }

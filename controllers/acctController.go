@@ -15,7 +15,7 @@ type AccountContext struct {
 }
 
 func (c *AccountContext) Ping(w http.ResponseWriter, r *http.Request) {
-	basic := models.BasicJSONReturn{"LandcoAPI", "200", "Pong"}
+	basic := models.BasicJSONReturn{"Ping", "200", "Pong"}
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(basic)
 
@@ -43,20 +43,20 @@ func (c *AccountContext) DnsRegister(w http.ResponseWriter, r *http.Request){
 	dnsEntry.Region = r.Header.Get("X-SecondLife-Region")
 
 
-	basic := models.BasicJSONReturn{"LandcoAPI", "200", "DNS-Registered"}
+	basic := models.BasicJSONReturn{"DnsRegister", "200", "DNS-Registered"}
 
 	repo := models.DnsRepo{c.Db.Collection("dns")}
 	if(repo.Exists(dnsEntry)){ //update
 		updateResult := repo.Update(dnsEntry)
 		if(updateResult.MatchedCount == 0){
-			basic = models.BasicJSONReturn{"LandcoAPI", "500", "ErrInternalServer"}
+			basic = models.BasicJSONReturn{"DnsRegister", "500", "ErrInternalServer"}
 		}
 		fmt.Printf("Matched %v documents and updated %v documents.\n", updateResult.MatchedCount, updateResult.ModifiedCount)
 
 	}else{ //insert
 		insertResult := repo.Insert(dnsEntry)
 		if(insertResult.InsertedID == ""){
-			basic = models.BasicJSONReturn{"LandcoAPI", "500", "ErrInternalServer"}
+			basic = models.BasicJSONReturn{"DnsRegister", "500", "ErrInternalServer"}
 		}
 		fmt.Println("Inserted a single document: ", insertResult.InsertedID)
 
@@ -66,7 +66,7 @@ fmt.Println("Now create the defaul box")
 		boxRepo := models.BoxRepo{c.Db.Collection("box")}
 		insertResult = boxRepo.CreateDefault(dnsEntry)
 		if(insertResult.InsertedID == ""){
-			basic = models.BasicJSONReturn{"LandcoAPI", "500", "ErrInternalServer"}
+			basic = models.BasicJSONReturn{"DnsRegister", "500", "ErrInternalServer"}
 		}
 		fmt.Println("Inserted a single box document: ", insertResult.InsertedID)
 
