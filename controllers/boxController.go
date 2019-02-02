@@ -81,17 +81,12 @@ func (c *BoxContext) UpdateBox(w http.ResponseWriter, r *http.Request){
 	dnsRepo := models.DnsRepo{c.Db.Collection("dns")}
 	dns := dnsRepo.Get(serial)
 
-	// todo add return type, return status to front of json string??
-
 	jsonStr, err := json.Marshal(box)
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
 	//fmt.Println(string(jsonStr))
-
-
-	//s := string(jsonStr[:len(jsonStr)])
 
 	basic := models.BasicJSONReturn{"UpdateBox", "200", string(jsonStr[:len(jsonStr)])}
 
@@ -117,7 +112,7 @@ func (c *BoxContext) UpdateBox(w http.ResponseWriter, r *http.Request){
 	fmt.Println("response Body:", string(body))
 
 
-	basic := models.BasicJSONReturn{"UpdateBox", "200", "Box Updated"}
+	basic = models.BasicJSONReturn{"UpdateBox", "200", "Box Updated"}
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(basic)
 }
