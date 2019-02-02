@@ -85,7 +85,8 @@ func (c *BoxContext) UpdateBox(w http.ResponseWriter, r *http.Request){
 	var updateBoxRequest models.UpdateBoxRequest
 
 	updateBoxRequest.Box = box
-	updateBoxRequest.RequestType = "UpdateBox"
+	updateBoxRequest.Type = "UpdateBox"
+	updateBoxRequest.Status = "600"
 
 
 	jsonStr, err := json.Marshal(updateBoxRequest)

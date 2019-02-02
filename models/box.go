@@ -29,7 +29,8 @@ type (
 	}
 
 	UpdateBoxRequest struct {
-		RequestType   string
+		Type   string
+		Status string
 		Box      Box
 	}
 )
