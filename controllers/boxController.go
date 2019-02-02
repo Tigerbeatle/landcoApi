@@ -99,7 +99,7 @@ func (c *BoxContext) UpdateBox(w http.ResponseWriter, r *http.Request){
 		return
 	}
 	req.Header.Set("Content-Type", "application/json")
-	req.Header.Set("X-Return-Type", "UpdateBox")
+	//req.Header.Set("X-Return-Type", "UpdateBox")
 
 	client := &http.Client{}
 	resp, err := client.Do(req)
@@ -115,7 +115,7 @@ func (c *BoxContext) UpdateBox(w http.ResponseWriter, r *http.Request){
 	fmt.Println("response Body:", string(body))
 
 
-	basic := models.BasicJSONReturn{"UpdateBox", "200", "Box Updated"}
+	basic := models.BasicJSONReturn{"UpdateBox", "600", "Box Updated"}
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(basic)
 }
