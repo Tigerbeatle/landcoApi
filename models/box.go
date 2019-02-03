@@ -22,7 +22,7 @@ type (
 	}
 
 	Box struct {
-		ProfitShare  string     `json:"profitShare"  bson:"profitShare"`
+		ProfitShare  bool     `json:"profitShare"  bson:"profitShare"`
 		Prices       []Price  `json:"prices" bson:"prices"`
 		SerialNumber string   `json:"serialNumber"    bson:"serialNumber"`
 		Shares       []Person `json:"shares" bson:"shares"`
