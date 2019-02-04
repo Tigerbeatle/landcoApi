@@ -17,21 +17,29 @@ type BoxRepo struct {
 
 type (
 	Price struct {
-		Amount	int	`json:"amount"  bson:"amount"`
+		Amount	 int	 `json:"amount"  bson:"amount"`
 		Duration float32 `json:"duration"  bson:"duration"`
 	}
 
 	Box struct {
-		ProfitShare  string     `json:"profitShare"  bson:"profitShare"`
-		Prices       []Price  `json:"prices" bson:"prices"`
-		SerialNumber string   `json:"serialNumber"    bson:"serialNumber"`
-		Shares       []Person `json:"shares" bson:"shares"`
+		ProfitShare  string       `json:"profitShare"  bson:"profitShare"`
+		Prices       []Price      `json:"prices" bson:"prices"`
+		SerialNumber string       `json:"serialNumber"    bson:"serialNumber"`
+		ShareOwners  []ShareOwner `json:"shareOwners" bson:"shareOwners"`
 	}
 
-	UpdateBoxRequest struct {
+	UpdateBoxRequest struct {  // not stored in database
 		Type   string
 		Status string
 		Box      Box
+	}
+
+	ShareOwner struct {
+		Primary	string  `json:"primary"  bson:"primary"`
+		Percentage int	`json:"percentage"  bson:"percentage"`
+		UUID    string  `json:"uuid"    bson:"uuid"`
+		Name    string  `json:"name"    bson:"name"`
+
 	}
 )
 
