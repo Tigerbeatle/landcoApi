@@ -22,7 +22,7 @@ type (
 	}
 
 	Box struct {
-		ProfitShare  bool     `json:"profitShare"  bson:"profitShare"`
+		ProfitShare  string     `json:"profitShare"  bson:"profitShare"`
 		Prices       []Price  `json:"prices" bson:"prices"`
 		SerialNumber string   `json:"serialNumber"    bson:"serialNumber"`
 		Shares       []Person `json:"shares" bson:"shares"`
@@ -88,10 +88,9 @@ func (r *BoxRepo) Delete(serialNumber string)  { // NOTE: UNTESTED
 }
 
 func (r *BoxRepo) CreateDefault(e DnsEntry) *mongo.InsertOneResult{
-	fmt.Println("Inside CreateDefault")
 	var box Box
 	box.SerialNumber = e.SerialNumber
-	box.ProfitShare = false
+	box.ProfitShare = "false"
 
 	insertResult, err := r.Coll.InsertOne(context.TODO(), box)
 	if err != nil {
