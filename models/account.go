@@ -8,10 +8,11 @@ type AccountRepo struct {
 
 type (
 	AccountHolder struct {
-		AccountOwner Person `json:"person" bson:"person"`
-		ShareHolders []ShareHolder  `json:"shareHolders" bson:"shareHolders"`
-		OrganizationName string `json:"organizationName" bson:"organizationName"`
-		AccountUUID string `json:"accountUUID" bson:"accountUUID"`
+		AccountOwner		Person `json:"person" bson:"person"`
+		ShareHolders		[]ShareHolder  `json:"shareHolders" bson:"shareHolders"`
+		OrganizationName	string `json:"organizationName" bson:"organizationName"`
+		AccountUUID			string `json:"accountUUID" bson:"accountUUID"`
+		Email				string `valid:"email" json:"email" bson:"email"`
 	}
 
 	ShareHolder struct {
