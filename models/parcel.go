@@ -16,5 +16,7 @@ type (
 		Area        int		`json:"area"`
 		UUID		string	`json:"uuid"`
 		SeeAvatars	int		`json:"seeAvatars"`
+		Surl    	string  `json:"surl"    bson:"surl"`
+		Url     	string  `json:"url"     bson:"url"`
 	}
 )

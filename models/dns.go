@@ -21,13 +21,13 @@ type DnsRepo struct {
 
 
 type (
-
+/*
 	Parcel struct {
 		Surl    string  `json:"surl"    bson:"surl"`
 		Url     string  `json:"url"     bson:"url"`
 		Name    string  `json:"name"    bson:"name"`
 	}
-
+*/
 	Person struct {
 		UUID    string  `json:"uuid"    bson:"uuid"`
 		Name    string  `json:"name"    bson:"name"`
