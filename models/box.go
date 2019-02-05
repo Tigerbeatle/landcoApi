@@ -22,10 +22,11 @@ type (
 	}
 
 	Box struct {
-		ProfitShare  string       `json:"profitShare"  bson:"profitShare"`
-		Prices       []Price      `json:"prices" bson:"prices"`
-		SerialNumber string       `json:"serialNumber"    bson:"serialNumber"`
-		ShareOwners  []ShareOwner `json:"shareOwners" bson:"shareOwners"`
+		ProfitShare		string			`json:"profitShare" bson:"profitShare"`
+		Prices			[]Price			`json:"prices" bson:"prices"`
+		SerialNumber	string			`json:"serialNumber" bson:"serialNumber"`
+		Tenant			Person			`json:"tenant" bson:"tenant"`
+		BoxOwner		Person			`json:"boxOwner" bson:"boxOwner"`
 	}
 
 	UpdateBoxRequest struct {  // not stored in database
@@ -34,13 +35,7 @@ type (
 		Box      Box
 	}
 
-	ShareOwner struct {
-		Primary	string  `json:"primary"  bson:"primary"`
-		Percentage int	`json:"percentage"  bson:"percentage"`
-		UUID    string  `json:"uuid"    bson:"uuid"`
-		Name    string  `json:"name"    bson:"name"`
 
-	}
 )
 
 
