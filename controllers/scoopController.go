@@ -22,6 +22,7 @@ func (c *ScoopContext) Region(w http.ResponseWriter, r *http.Request) {
 }
 
 func (c *ScoopContext) Parcel(w http.ResponseWriter, r *http.Request) {
+	fmt.Println(r.Body)
 	basic := models.BasicJSONReturn{"Ping", "200", "Parcel"}
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(basic)
