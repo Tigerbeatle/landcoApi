@@ -15,14 +15,14 @@ type ScoopContext struct {
 
 func (c *ScoopContext) Region(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(r.Body)
-	basic := models.BasicJSONReturn{"Ping", "200", "Pong"}
+	basic := models.BasicJSONReturn{"Ping", "200", "Region"}
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(basic)
 
 }
 
 func (c *ScoopContext) Parcel(w http.ResponseWriter, r *http.Request) {
-	basic := models.BasicJSONReturn{"Ping", "200", "Pong"}
+	basic := models.BasicJSONReturn{"Ping", "200", "Parcel"}
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(basic)
 
