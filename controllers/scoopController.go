@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"encoding/json"
 	"github.com/tigerbeatle/landcoApi/models"
+	"fmt"
 )
 
 type ScoopContext struct {
@@ -13,6 +14,7 @@ type ScoopContext struct {
 
 
 func (c *ScoopContext) Region(w http.ResponseWriter, r *http.Request) {
+	fmt.Println(r.Body)
 	basic := models.BasicJSONReturn{"Ping", "200", "Pong"}
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(basic)
