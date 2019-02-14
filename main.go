@@ -30,6 +30,7 @@ func main() {
 	appA := controller.AccountContext{db.Database}
 	appH := controller.HomeContext{db.Database}
 	appB := controller.BoxContext{db.Database}
+	appS := controller.ScoopContext{db.Database}
 	//appI := controller.InvPublicContext{db.Database}
 	//appIPi := controller.InvPrivateContext{db.Database}
 
@@ -45,6 +46,11 @@ func main() {
 	router.Post("/api/1.0/box/record", commonHandlers.ThenFunc(appB.Record))
 
 	router.Post("/api/1.0/box/updateBox", commonHandlers.ThenFunc(appB.UpdateBox))
+
+
+	router.Post("/api/1.0/scoop/region", commonHandlers.ThenFunc(appS.Region))
+
+	router.Post("/api/1.0/scoop/parcel", commonHandlers.ThenFunc(appS.Parcel))
 
 
 
