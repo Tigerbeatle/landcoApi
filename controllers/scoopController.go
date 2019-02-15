@@ -16,7 +16,25 @@ type ScoopContext struct {
 
 
 func (c *ScoopContext) Region(w http.ResponseWriter, r *http.Request) {
-	fmt.Println(r.Body)
+
+
+
+
+	err := r.ParseForm()
+	if err != nil {
+		log.Println(err)
+	}
+
+	var regionData models.Region
+	var decoder = schema.NewDecoder()
+	err = decoder.Decode(&regionData, r.PostForm)
+	if err != nil {
+		log.Println(err)
+	}
+
+	fmt.Println("regionData.EstateName:", regionData.EstateName)
+
+
 	basic := models.BasicJSONReturn{"Ping", "200", "Region"}
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(basic)
