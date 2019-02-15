@@ -46,18 +46,25 @@ func (c *ScoopContext) Region(w http.ResponseWriter, r *http.Request) {
 }
 
 func (c *ScoopContext) Parcel(w http.ResponseWriter, r *http.Request) {
-	fmt.Println(r.Body)
 	err := r.ParseForm()
 	if err != nil {
 		log.Println(err)
 	}
 
-	var dnsEntry models.DnsEntry
+	var parcelData models.Parcel
 	var decoder = schema.NewDecoder()
-	err = decoder.Decode(&dnsEntry, r.PostForm)
+	err = decoder.Decode(&parcelData, r.PostForm)
 	if err != nil {
 		log.Println(err)
 	}
+
+
+	fmt.Println("parcelData.AccountOwner.Name:", parcelData.AccountOwner.Name)
+	fmt.Println("parcelData.Owner.Name:", parcelData.Owner.Name)
+	fmt.Println("arcelData.Flags.AllowDamage:", parcelData.Flags.AllowDamage)
+
+
+
 
 	basic := models.BasicJSONReturn{"Ping", "200", "Parcel"}
 	w.Header().Set("Content-Type", "application/json")
