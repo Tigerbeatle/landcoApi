@@ -32,7 +32,10 @@ func (c *ScoopContext) Region(w http.ResponseWriter, r *http.Request) {
 		log.Println(err)
 	}
 
+	fmt.Println("regionData.AccountOwner.Name:", regionData.AccountOwner.Name)
 	fmt.Println("regionData.EstateName:", regionData.EstateName)
+
+
 
 
 	basic := models.BasicJSONReturn{"Ping", "200", "Region"}
