@@ -8,16 +8,17 @@ type AccountRepo struct {
 
 type (
 	AccountHolder struct {
-		AccountOwner		Person `json:"person" bson:"person"`
-		ShareHolders		[]ShareHolder  `json:"shareHolders" bson:"shareHolders"`
-		OrganizationName	string `json:"organizationName" bson:"organizationName"`
-		AccountUUID			string `json:"accountUUID" bson:"accountUUID"`
-		Email				string `valid:"email" json:"email" bson:"email"`
+		AccountOwner		Person			`json:"accountOwner"`
+		ShareHolders		[]ShareHolder	`json:"shareHolders"`
+		OrganizationName	string 			`json:"organizationName"`
+		AccountUUID			string 			`json:"accountUUID"`
+		Email				string 			`valid:"email" json:"email"`
 	}
 
+
 	ShareHolder struct {
-		Percentage int	`json:"percentage"  bson:"percentage"`
-		ShareHolderName Person `json:"shareHolderName"  bson:"shareHolderName"`
+		Percentage 			int				`json:"percentage"`
+		ShareHolderName 	Person 			`json:"shareHolderName"`
 	}
 )
 
