@@ -22,7 +22,7 @@ type (
 		DynamicPathfinding		string				`json:"dynamicPathfinding"`
 		FrameNumber				string				`json:"frameNumber"`
 		CPURatio				string				`json:"CPURatio"`
-		idle					string				`json:"idle"`
+		Idle					string				`json:"idle"`
 		ProductName				string				`json:"productName"`
 		ProjectSku				string				`json:"projectSku"`
 		StartTime				string				`json:"startTime"`

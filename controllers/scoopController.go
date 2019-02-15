@@ -34,6 +34,7 @@ func (c *ScoopContext) Region(w http.ResponseWriter, r *http.Request) {
 
 	fmt.Println("regionData.AccountOwner.Name:", regionData.AccountOwner.Name)
 	fmt.Println("regionData.EstateName:", regionData.EstateName)
+	fmt.Println("regionData.Flags.AllowDamage:", regionData.Flags.AllowDamage)
 
 
 
