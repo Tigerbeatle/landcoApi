@@ -8,6 +8,7 @@ import (
 	"fmt"
 	"log"
 	"github.com/gorilla/schema"
+	"github.com/imdario/mergo"
 )
 
 type ScoopContext struct {
@@ -16,10 +17,6 @@ type ScoopContext struct {
 
 
 func (c *ScoopContext) Region(w http.ResponseWriter, r *http.Request) {
-
-
-
-
 	err := r.ParseForm()
 	if err != nil {
 		log.Println(err)
@@ -32,14 +29,40 @@ func (c *ScoopContext) Region(w http.ResponseWriter, r *http.Request) {
 		log.Println(err)
 	}
 
-	fmt.Println("regionData.AccountOwner.Name:", regionData.AccountOwner.Name)
-	fmt.Println("regionData.EstateName:", regionData.EstateName)
-	fmt.Println("regionData.Flags.AllowDamage:", regionData.Flags.AllowDamage)
+
+	basic := models.BasicJSONReturn{"LandcoAPI", "200", "Region"}
+
+	repo := models.ScoopRepo{c.Db.Collection("regions")}
+	if(repo.RegionExists(regionData)){ //replace
+
+		dst := repo.RegionGet(regionData.Name)
+		err = mergo.Merge(&dst, regionData, mergo.WithOverride)
+		if err != nil {
+			log.Println(err)
+		}
+		updateResult := repo.RegionReplace(regionData)
+		if(updateResult.MatchedCount == 0){
+			basic = models.BasicJSONReturn{"Record", "500", "ErrInternalServer"}
+		}
+		fmt.Printf("Matched %v documents and updated %v documents.\n", updateResult.MatchedCount, updateResult.ModifiedCount)
+	}else{ //insert
+		insertResult := repo.RegionInsert(regionData)
+		if(insertResult.InsertedID == ""){
+			basic = models.BasicJSONReturn{"Record", "500", "ErrInternalServer"}
+		}
+		fmt.Println("Inserted a single document: ", insertResult.InsertedID)
+	}
 
 
 
 
-	basic := models.BasicJSONReturn{"Ping", "200", "Region"}
+	fmt.Println("--regionData.AccountOwner.Name:", regionData.AccountOwner.Name)
+	fmt.Println("--regionData.EstateName:", regionData.EstateName)
+	fmt.Println("--regionData.Flags.AllowDamage:", regionData.Flags.AllowDamage)
+
+
+
+
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(basic)
 
@@ -61,7 +84,7 @@ func (c *ScoopContext) Parcel(w http.ResponseWriter, r *http.Request) {
 
 	fmt.Println("parcelData.AccountOwner.Name:", parcelData.AccountOwner.Name)
 	fmt.Println("parcelData.Owner.Name:", parcelData.Owner.Name)
-	fmt.Println("arcelData.Flags.AllowDamage:", parcelData.Flags.AllowDamage)
+	fmt.Println("parcelData.Flags.AllowDamage:", parcelData.Flags.AllowDamage)
 
 
 
