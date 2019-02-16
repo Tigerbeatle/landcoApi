@@ -7,9 +7,6 @@ import (
 	"context"
 )
 
-type RegionRepo struct {
-	Coll *mongo.Collection
-}
 
 type (
 	Region struct {
