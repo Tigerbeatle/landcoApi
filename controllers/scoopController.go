@@ -32,21 +32,21 @@ func (c *ScoopContext) Region(w http.ResponseWriter, r *http.Request) {
 
 	basic := models.BasicJSONReturn{"LandcoAPI", "200", "Region"}
 
-	repo := models.ScoopRepo{c.Db.Collection("regions")}
-	if(repo.RegionExists(regionData)){ //replace
+	repo := models.RegionRepo{c.Db.Collection("regions")}
+	if(repo.Exists(regionData)){ //replace
 
-		dst := repo.RegionGet(regionData.Name)
+		dst := repo.Get(regionData.Name)
 		err = mergo.Merge(&dst, regionData, mergo.WithOverride)
 		if err != nil {
 			log.Println(err)
 		}
-		updateResult := repo.RegionReplace(regionData)
+		updateResult := repo.Replace(regionData)
 		if(updateResult.MatchedCount == 0){
 			basic = models.BasicJSONReturn{"Record", "500", "ErrInternalServer"}
 		}
 		fmt.Printf("Matched %v documents and updated %v documents.\n", updateResult.MatchedCount, updateResult.ModifiedCount)
 	}else{ //insert
-		insertResult := repo.RegionInsert(regionData)
+		insertResult := repo.Insert(regionData)
 		if(insertResult.InsertedID == ""){
 			basic = models.BasicJSONReturn{"Record", "500", "ErrInternalServer"}
 		}
