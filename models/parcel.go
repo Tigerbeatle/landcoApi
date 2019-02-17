@@ -68,7 +68,7 @@ type ParcelRepo struct {
 
 
 func (r *ParcelRepo) Exists(e Parcel) bool {
-	var result Box
+	var result Parcel
 	filter := bson.D{{"UUID", e.UUID}}
 	err := r.Coll.FindOne(context.TODO(), filter).Decode(&result)
 	if err != nil {
