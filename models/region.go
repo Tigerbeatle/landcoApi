@@ -32,7 +32,6 @@ type (
 		MaxPrims				string				`json:"maxPrims"`
 		ObjectBonus				string				`json:"objectBonus"`
 		Flags					RegionFlags			`json:"flags"`
-		Parcels					Parcel				`json:"parcels"`
 	}
 
 	RegionFlags struct {
