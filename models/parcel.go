@@ -69,7 +69,7 @@ type ParcelRepo struct {
 
 func (r *ParcelRepo) Exists(e Parcel) bool {
 	var result Parcel
-	filter := bson.D{{"UUID", e.UUID}}
+	filter := bson.D{{"uuid", e.UUID}}
 	err := r.Coll.FindOne(context.TODO(), filter).Decode(&result)
 	if err != nil {
 		log.Println(err)
@@ -89,7 +89,7 @@ func (r *ParcelRepo) Insert(e Parcel)  *mongo.InsertOneResult{
 
 func (r *ParcelRepo) Get(UUID string)  Parcel{
 	var result Parcel
-	filter := bson.D{{"UUID", UUID}}
+	filter := bson.D{{"uuid", UUID}}
 	err := r.Coll.FindOne(context.TODO(), filter).Decode(&result)
 	if err != nil {
 		log.Println(err)
@@ -99,7 +99,7 @@ func (r *ParcelRepo) Get(UUID string)  Parcel{
 }
 
 func (r *ParcelRepo) Replace(e Parcel)  *mongo.UpdateResult {
-	filter := bson.D{{"UUID", e.UUID}}
+	filter := bson.D{{"uuid", e.UUID}}
 	update := e
 	replaceResult, err := r.Coll.ReplaceOne(context.TODO(), filter, update)
 	if err != nil {
