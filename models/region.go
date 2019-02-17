@@ -55,7 +55,6 @@ type RegionRepo struct {
 
 
 func (r *RegionRepo) Exists(e Region) bool {
-	// look for record via serial number (uuid of rental box)
 	var result Box
 	filter := bson.D{{"name", e.Name}}
 	err := r.Coll.FindOne(context.TODO(), filter).Decode(&result)
@@ -89,7 +88,6 @@ func (r *RegionRepo) Get(name string)  Region{
 func (r *RegionRepo) Replace(e Region)  *mongo.UpdateResult{
 	filter := bson.D{{"name", e.Name}}
 	update := e
-
 	replaceResult, err := r.Coll.ReplaceOne(context.TODO(), filter, update)
 	if err != nil {
 		log.Println(err)

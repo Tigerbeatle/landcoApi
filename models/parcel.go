@@ -1,13 +1,14 @@
 package models
 
 import (
-	"github.com/mongodb/mongo-go-driver/mongo"
 	"time"
+	"github.com/mongodb/mongo-go-driver/mongo"
+	"log"
+	"github.com/mongodb/mongo-go-driver/bson"
+	"context"
 )
 
-type ParcelRepo struct {
-	Coll *mongo.Collection
-}
+
 
 type (
 	Parcel struct {
@@ -59,5 +60,50 @@ type (
 		AllowGroupObjectEntry		string		`json:"allowGroupObjectEntry"`
 	}
 
-
 )
+
+type ParcelRepo struct {
+	Coll *mongo.Collection
+}
+
+
+func (r *ParcelRepo) Exists(e Parcel) bool {
+	var result Box
+	filter := bson.D{{"UUID", e.UUID}}
+	err := r.Coll.FindOne(context.TODO(), filter).Decode(&result)
+	if err != nil {
+		log.Println(err)
+		return false
+	}
+	return true
+}
+
+
+func (r *ParcelRepo) Insert(e Parcel)  *mongo.InsertOneResult{
+	insertResult, err := r.Coll.InsertOne(context.TODO(), e)
+	if err != nil {
+		log.Println(err)
+	}
+	return insertResult
+}
+
+func (r *ParcelRepo) Get(UUID string)  Parcel{
+	var result Parcel
+	filter := bson.D{{"UUID", UUID}}
+	err := r.Coll.FindOne(context.TODO(), filter).Decode(&result)
+	if err != nil {
+		log.Println(err)
+	}
+	//fmt.Printf("Found a single document: %+v\n", result)
+	return result
+}
+
+func (r *ParcelRepo) Replace(e Parcel)  *mongo.UpdateResult {
+	filter := bson.D{{"UUID", e.UUID}}
+	update := e
+	replaceResult, err := r.Coll.ReplaceOne(context.TODO(), filter, update)
+	if err != nil {
+		log.Println(err)
+	}
+	return replaceResult
+}
