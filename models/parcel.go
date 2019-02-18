@@ -14,20 +14,19 @@ type (
 	Parcel struct {
 		AccountOwner			Person				`json:"accountOwner"`
 		EstateID				string				`json:"estateID"`
+		RegionName				string				`json:"regionName"`
 		Owner					Person				`json:"owner"`
 		Pos						string				`json:"pos"`
-		UUID					string				`json:"uuid"` // server assigned
-		Name					string				`json:"name"` // Sourced by sl obj llGetParcelDetails
-		Desc					string				`json:"desc"` // Sourced by sl obj llGetParcelDetails
-		GroupUUID				string				`json:"group"` // Sourced by sl obj (group key) llGetParcelDetails
-		Area					int					`json:"area"` // Sourced by sl obj llGetParcelDetails
-		SeeAvatars				int					`json:"seeAvatars"` // Sourced by sl obj llGetParcelDetails
-		Tenant					Person				`json:"tenant"` // Sourced by sl obj (rental box)
-		Prices					[]Price				`json:"prices"` // Sourced by website
-		PrimCounts				PrimCounts			`json:"primCount"` // Sourced by sl obj llGetParcelPrimCount
-		Flags					ParcelFlags			`json:"flags"` // Sourced by sl obj llGetRegionFlags
-		Surl    				string  			`json:"surl"` // Sourced by sl obj (rental box)
-		Url     				string  			`json:"url"` // Sourced by sl obj (rental box)
+		UUID					string				`json:"uuid"`
+		Name					string				`json:"name"`
+		Desc					string				`json:"desc"`
+		GroupUUID				string				`json:"group"`
+		Area					int					`json:"area"`
+		SeeAvatars				int					`json:"seeAvatars"`
+		Tenant					Person				`json:"tenant"`
+		Prices					[]Price				`json:"prices"`
+		PrimCounts				PrimCounts			`json:"primCount"`
+		Flags					ParcelFlags			`json:"flags"`
 		RentalDate 				time.Time			`json:"rentalDate"`
 		RentalDuration			int					`json:"rentalDuration"`
 	}

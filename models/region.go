@@ -14,7 +14,7 @@ type (
 		EstateID				string				`json:"estateID"`
 		EstateName				string				`json:"estateName"`
 		SimulatorHostname		string				`json:"simulatorHostname"`
-		Name					string				`json:"name"`
+		RegionName				string				`json:"regionName"`
 		Rating					string				`json:"rating"`
 		Status					string				`json:"status"`
 		Pos						string				`json:"pos"`
@@ -56,7 +56,7 @@ type RegionRepo struct {
 
 func (r *RegionRepo) Exists(e Region) bool {
 	var result Box
-	filter := bson.D{{"name", e.Name}}
+	filter := bson.D{{"regionname", e.RegionName}}
 	err := r.Coll.FindOne(context.TODO(), filter).Decode(&result)
 	if err != nil {
 		log.Println(err)
@@ -74,9 +74,9 @@ func (r *RegionRepo) Insert(e Region)  *mongo.InsertOneResult{
 	return insertResult
 }
 
-func (r *RegionRepo) Get(name string)  Region{
+func (r *RegionRepo) Get(regionName string)  Region{
 	var result Region
-	filter := bson.D{{"name", name}}
+	filter := bson.D{{"regionname", regionName}}
 	err := r.Coll.FindOne(context.TODO(), filter).Decode(&result)
 	if err != nil {
 		log.Println(err)
@@ -86,7 +86,7 @@ func (r *RegionRepo) Get(name string)  Region{
 }
 
 func (r *RegionRepo) Replace(e Region)  *mongo.UpdateResult{
-	filter := bson.D{{"name", e.Name}}
+	filter := bson.D{{"regionname", e.RegionName}}
 	update := e
 	replaceResult, err := r.Coll.ReplaceOne(context.TODO(), filter, update)
 	if err != nil {
