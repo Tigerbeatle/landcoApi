@@ -35,7 +35,7 @@ func (c *ScoopContext) Region(w http.ResponseWriter, r *http.Request) {
 	repo := models.RegionRepo{c.Db.Collection("regions")}
 	if(repo.Exists(regionData)){ //replace
 
-		dst := repo.Get(regionData.Name)
+		dst := repo.Get(regionData.RegionName)
 		err = mergo.Merge(&dst, regionData, mergo.WithOverride)
 		if err != nil {
 			log.Println(err)
