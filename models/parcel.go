@@ -29,6 +29,8 @@ type (
 		Flags					ParcelFlags			`json:"flags"`
 		RentalDate 				time.Time			`json:"rentalDate"`
 		RentalDuration			int					`json:"rentalDuration"`
+		Surl    string  `json:"surl"    bson:"surl"`
+		Url     string  `json:"url"     bson:"url"`
 	}
 
 	PrimCounts struct {
