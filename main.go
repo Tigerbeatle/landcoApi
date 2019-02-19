@@ -49,9 +49,9 @@ func main() {
 
 
 	router.Post("/api/1.0/scoop/region", commonHandlers.ThenFunc(appS.Region))
-
 	router.Post("/api/1.0/scoop/parcel", commonHandlers.ThenFunc(appS.Parcel))
 
+	router.Get("/api/1.0/scoop/region/getRegionsByEstate", commonHandlers.ThenFunc(appS.GetRegionsByEstate))
 
 
 

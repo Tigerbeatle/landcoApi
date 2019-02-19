@@ -5,6 +5,7 @@ import (
 	"log"
 	"github.com/mongodb/mongo-go-driver/bson"
 	"context"
+	"github.com/mongodb/mongo-go-driver/mongo/options"
 )
 
 
@@ -55,7 +56,7 @@ type RegionRepo struct {
 
 
 func (r *RegionRepo) Exists(e Region) bool {
-	var result Box
+	var result Region
 	filter := bson.D{{"regionname", e.RegionName}}
 	err := r.Coll.FindOne(context.TODO(), filter).Decode(&result)
 	if err != nil {
@@ -94,3 +95,41 @@ func (r *RegionRepo) Replace(e Region)  *mongo.UpdateResult{
 	}
 	return replaceResult
 }
+
+
+func (r *RegionRepo) GetByEstateID(estateId string)  []*Region{
+
+	// Pass these options to the Find method
+	findOptions := options.Find()
+	findOptions.SetLimit(2)
+
+	var results []*Region
+	filter := bson.D{{"estateid", estateId}}
+	cur, err := r.Coll.Find(context.TODO(), filter, findOptions)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	for cur.Next(context.TODO()) {
+
+		// create a value into which the single document can be decoded
+		var elem Region
+		err := cur.Decode(&elem)
+		if err != nil {
+			log.Fatal(err)
+		}
+		results = append(results, &elem)
+	}
+
+	if err := cur.Err(); err != nil {
+		log.Fatal(err)
+	}
+
+	// Close the cursor once finished
+	cur.Close(context.TODO())
+
+	//fmt.Printf("Found multiple documents (array of pointers): %+v\n", results)
+	return results
+}
+
+

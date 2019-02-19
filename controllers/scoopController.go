@@ -29,9 +29,7 @@ func (c *ScoopContext) Region(w http.ResponseWriter, r *http.Request) {
 		log.Println(err)
 	}
 
-
 	basic := models.BasicJSONReturn{"LandcoAPI", "200", "Region"}
-
 	repo := models.RegionRepo{c.Db.Collection("regions")}
 	if(repo.Exists(regionData)){ //replace
 
@@ -52,17 +50,6 @@ func (c *ScoopContext) Region(w http.ResponseWriter, r *http.Request) {
 		}
 		fmt.Println("Inserted a single document: ", insertResult.InsertedID)
 	}
-
-
-
-
-	fmt.Println("--regionData.AccountOwner.Name:", regionData.AccountOwner.Name)
-	fmt.Println("--regionData.EstateName:", regionData.EstateName)
-	fmt.Println("--regionData.Flags.AllowDamage:", regionData.Flags.AllowDamage)
-
-
-
-
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(basic)
 
@@ -81,9 +68,7 @@ func (c *ScoopContext) Parcel(w http.ResponseWriter, r *http.Request) {
 		log.Println(err)
 	}
 
-
 	basic := models.BasicJSONReturn{"Ping", "200", "Parcel"}
-
 	repo := models.ParcelRepo{c.Db.Collection("parcels")}
 
 	if(repo.Exists(parcelData)){ //replace
@@ -106,20 +91,24 @@ func (c *ScoopContext) Parcel(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("Inserted a single document: ", insertResult.InsertedID)
 	}
 
-
-
-
-
-
-
-	fmt.Println("parcelData.AccountOwner.Name:", parcelData.AccountOwner.Name)
-	fmt.Println("parcelData.Owner.Name:", parcelData.Owner.Name)
-	fmt.Println("parcelData.Flags.AllowDamage:", parcelData.Flags.AllowDamage)
-
-
-
-
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(basic)
 
+}
+
+func (c *ScoopContext) GetRegionsByEstate(w http.ResponseWriter, r *http.Request) {
+	keys, ok := r.URL.Query()["estateid"]
+	if !ok || len(keys[0]) < 1 {
+		log.Println("Url Param 'key' is missing")
+		return
+	}
+	estateid := keys[0]
+
+	//log.Println("Url Param 'estateid' is: " + string(estateid))
+
+	repo := models.RegionRepo{c.Db.Collection("regions")}
+	results := repo.GetByEstateID(estateid)
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(results)
 }
