@@ -104,11 +104,12 @@ func (c *ScoopContext) GetRegionsByEstate(w http.ResponseWriter, r *http.Request
 	}
 	estateid := keys[0]
 
-	//log.Println("Url Param 'estateid' is: " + string(estateid))
+	log.Println("Url Param 'estateid' is: " + string(estateid))
 
 	repo := models.RegionRepo{c.Db.Collection("regions")}
 	results := repo.GetByEstateID(estateid)
 
 	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("Content-Access-Control-Allow-Origin", "*")
 	json.NewEncoder(w).Encode(results)
 }

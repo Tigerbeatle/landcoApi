@@ -9,6 +9,7 @@ import (
 	"net/http"
 	"log"
 	"github.com/kelseyhightower/envconfig"
+	"github.com/rs/cors"
 )
 
 func main() {
@@ -25,6 +26,7 @@ func main() {
 
 	commonHandlers := alice.New(middleware.RecoverHandler, middleware.AcceptHandler)
 	router := routes.NewRouter()
+
 
 
 	appA := controller.AccountContext{db.Database}
@@ -87,7 +89,12 @@ func main() {
 	log.Println("API Starting on Port:",s.Port,"...")
 
 
-	log.Fatal(http.ListenAndServe(":8002", router))
+	//log.Fatal(http.ListenAndServe(":8002", router))
+
+
+	handler := cors.Default().Handler(router)
+	http.ListenAndServe(":8002", handler)
+
 
 	log.Println("API Stopped")
 
