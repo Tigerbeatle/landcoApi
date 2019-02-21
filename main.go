@@ -27,6 +27,7 @@ func main() {
 	// Lets set some routes
 	c := cors.New(cors.Options{
 		AllowedOrigins: []string{"http://landco-sl.com"},
+		AllowCredentials: true,
 	})
 	commonHandlers := alice.New(c.Handler, middleware.RecoverHandler, middleware.AcceptHandler)
 	router := routes.NewRouter()
