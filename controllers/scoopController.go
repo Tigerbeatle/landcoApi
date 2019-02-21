@@ -110,6 +110,6 @@ func (c *ScoopContext) GetRegionsByEstate(w http.ResponseWriter, r *http.Request
 	results := repo.GetByEstateID(estateid)
 
 	w.Header().Set("Content-Type", "application/json")
-	w.Header().Set("Content-Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 	json.NewEncoder(w).Encode(results)
 }
