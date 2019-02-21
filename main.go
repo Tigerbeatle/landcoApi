@@ -13,9 +13,7 @@ import (
 )
 
 func main() {
-	c := cors.New(cors.Options{
-		AllowedOrigins: []string{"http://landco-sl.com"},
-	})
+
 
 	var s models.Specification
 	err := envconfig.Process("landco", &s)
@@ -28,9 +26,13 @@ func main() {
 
 	// Lets set some routes
 
-	commonHandlers := alice.New(c.Handler,middleware.RecoverHandler, middleware.AcceptHandler)
+	commonHandlers := alice.New(middleware.RecoverHandler, middleware.AcceptHandler)
 	router := routes.NewRouter()
+	c := cors.New(cors.Options{
+		AllowedOrigins: []string{"http://landco-sl.com"},
+	})
 
+	chain := alice.New(c.Handler).Then(router)
 
 
 	appA := controller.AccountContext{db.Database}
@@ -93,7 +95,8 @@ func main() {
 	log.Println("API Starting on Port:",s.Port,"...")
 
 
-	log.Fatal(http.ListenAndServe(":8002", router))
+	//log.Fatal(http.ListenAndServe(":8002", router))
+	log.Fatal(http.ListenAndServe(":8002", chain))
 
 
 	//handler := cors.Default().Handler(router)
