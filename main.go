@@ -28,7 +28,7 @@ func main() {
 
 	// Lets set some routes
 
-	 := alice.New(c.Handler,middleware.RecoverHandler, middleware.AcceptHandler)
+	commonHandlers := alice.New(c.Handler,middleware.RecoverHandler, middleware.AcceptHandler)
 	router := routes.NewRouter()
 
 
